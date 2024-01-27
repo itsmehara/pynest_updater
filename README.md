@@ -8,6 +8,113 @@
 
 This Python script allows you to traverse a JSON structure recursively and update the path in each node. It's useful for tasks like updating addresses or populating address fields in a nested JSON.
 
+ * Input sample data.
+```json
+[
+  {
+    "person": "abc",
+    "city": "united states",
+    "facebooklink": "link",
+    "united states": [
+      {
+        "person": "cdf",
+        "city": "ohio",
+        "facebooklink": "link",
+        "ohio": [
+          {
+            "person": "efg",
+            "city": "clevland",
+            "facebooklink": "link",
+            "clevland": [
+              {
+                "person": "jkl",
+                "city": "Street A",
+                "facebooklink": "link",
+                "Street A": [
+                  {
+                    "person": "jkl",
+                    "city": "House 1",
+                    "facebooklink": "link"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "person": "ghi",
+            "city": "columbus",
+            "facebooklink": "link"
+          }
+        ]
+      },
+      {
+        "person": "abc",
+        "city": "washington",
+        "facebooklink": "link"
+      }
+    ]
+  }
+]
+```
+
+ * Output sample data.
+```json
+[
+  {
+    "person": "abc",
+    "city": "united states",
+    "facebooklink": "link",
+    "address": "united states",
+    "united states": [
+      {
+        "person": "cdf",
+        "city": "ohio",
+        "facebooklink": "link",
+        "address": "united states/ohio",
+        "ohio": [
+          {
+            "person": "efg",
+            "city": "clevland",
+            "facebooklink": "link",
+            "address": "united states/ohio/clevland",
+            "clevland": [
+              {
+                "person": "jkl",
+                "city": "Street A",
+                "facebooklink": "link",
+                "address": "united states/ohio/clevland/Street A",
+                "Street A": [
+                  {
+                    "person": "jkl",
+                    "city": "House 1",
+                    "facebooklink": "link",
+                    "address": "united states/ohio/clevland/Street A/House 1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "person": "ghi",
+            "city": "columbus",
+            "facebooklink": "link",
+            "address": "united states/ohio/columbus"
+          }
+        ]
+      },
+      {
+        "person": "abc",
+        "city": "washington",
+        "facebooklink": "link",
+        "address": "united states/washington"
+      }
+    ]
+  }
+]
+```
+
+
+
 ## Usage
 
 1. Clone the repository:
